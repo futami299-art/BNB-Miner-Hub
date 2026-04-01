@@ -449,7 +449,7 @@
         <div class="payment-grid" id="cryptoMethodsGrid"></div>
         <div class="address-glass">
           <div id="dynamicPayAddress" style="font-weight:600; color:#FDE047;">bc1qkrvuxrrjm9t96jdng86mhep29rvf4ezupepakx</div>
-          <div id="dynamicPayAmount" style="font-size:0.7rem; margin-top:5px; color:#FBBF24;">≈ 0.000045 BTC ($3)</div>
+          <div id="dynamicPayAmount" style="font-size:0.7rem; margin-top:5px; color:#FBBF24;">≈ 0.000058 ($3)</div>
           <button class="copy-sm" id="copyPayBtn" style="margin-top:8px;">📋 Copy Address</button>
         </div>
         <div class="step-line"><div class="step-number">1</div><div>Send <strong class="text-glow">$3 equivalent</strong> to the address above</div></div>
@@ -549,18 +549,18 @@
   let selectedMethod = "btc";
 
   const paymentMethods = {
-    btc: { name:"BTC", icon:"₿", addr:"bc1qkrvuxrrjm9t96jdng86mhep29rvf4ezupepakx", amountDesc:"≈ 0.000045 BTC", usdVal:3 },
-    eth: { name:"ETH", icon:"⟠", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.00115 ETH", usdVal:3 },
+    btc: { name:"BTC", icon:"₿", addr:"bc1qkrvuxrrjm9t96jdng86mhep29rvf4ezupepakx", amountDesc:"≈ 0.000058 BTC", usdVal:3 },
+    eth: { name:"ETH", icon:"⟠", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.0019 ETH", usdVal:3 },
     usdt_bep20: { name:"USDT(BEP20)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
     usdt_erc20: { name:"USDT(ERC20)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
     usdt_polygon: { name:"USDT(Polygon)", icon:"USDT", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"3 USDT", usdVal:3 },
-    doge: { name:"DOGE", icon:"Ð", addr:"DBdHkdK9cSnTsbSU7fC3UsEScGk3Vh5MQj", amountDesc:"≈ 23 DOGE", usdVal:3 },
-    sol: { name:"SOL", icon:"◎", addr:"BJRbjgLW13DwKkJvCTyXG9WTZoNVB4FQRsBKh4jN3TPH", amountDesc:"≈ 0.023 SOL", usdVal:3 },
-    ton: { name:"TON", icon:"⧫", addr:"UQCAmLdC9CScLicYOBjLuRh-GZN9CGGej5D04Bv5wsFzygjP", amountDesc:"≈ 2 TON", usdVal:3 },
-    bnb: { name:"BNB", icon:"🟡", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.0052 BNB", usdVal:3 },
-    ltc: { name:"LTC", icon:"Ł", addr:"LS8Cb6ve24tRaULwj9XfoYJDcRTbSbKr2s", amountDesc:"≈ 0.038 LTC", usdVal:3 },
-    trx: { name:"TRX", icon:"TRX", addr:"TNF2n1mc56nbXwHi1FXrXckXc74RWuYDux", amountDesc:"≈ 11 TRX", usdVal:3 },
-    matic: { name:"MATIC", icon:"MATIC", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 24 MATIC", usdVal:3 }
+    doge: { name:"DOGE", icon:"Ð", addr:"DBdHkdK9cSnTsbSU7fC3UsEScGk3Vh5MQj", amountDesc:"≈ 43 DOGE", usdVal:3 },
+    sol: { name:"SOL", icon:"◎", addr:"BJRbjgLW13DwKkJvCTyXG9WTZoNVB4FQRsBKh4jN3TPH", amountDesc:"≈ 0.048 SOL", usdVal:3 },
+    ton: { name:"TON", icon:"⧫", addr:"UQCAmLdC9CScLicYOBjLuRh-GZN9CGGej5D04Bv5wsFzygjP", amountDesc:"≈ 3.2 TON", usdVal:3 },
+    bnb: { name:"BNB", icon:"🟡", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 0.0065 BNB", usdVal:3 },
+    ltc: { name:"LTC", icon:"Ł", addr:"LS8Cb6ve24tRaULwj9XfoYJDcRTbSbKr2s", amountDesc:"≈ 0.074 LTC", usdVal:3 },
+    trx: { name:"TRX", icon:"TRX", addr:"TNF2n1mc56nbXwHi1FXrXckXc74RWuYDux", amountDesc:"≈ 13 TRX", usdVal:3 },
+    matic: { name:"MATIC", icon:"MATIC", addr:"0x8Ed272B8003eC72F434929EB7E712dea2772A360", amountDesc:"≈ 44 MATIC", usdVal:3 }
   };
 
   // DOM Elements
